@@ -62,7 +62,7 @@ const Dashboard = () => {
                 setLoading={setLoading}
                 endpoint="upload"
               />
-              {report && (
+              {report && deployments && (
                 <div className="space-y-8">
                   <ReportSummary report={report} />
                   <FireMap deployments={deployments} />
