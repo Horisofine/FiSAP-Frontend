@@ -42,7 +42,7 @@ const FileUpload = () => {
       setSuccess(true);
       // Redirect to dashboard after successful upload
       setTimeout(() => {
-        window.location.href = "/dashboard";
+        window.location.href = "/";
       }, 2000);
     } catch (err) {
       setError("Failed to upload file. Please try again.");
