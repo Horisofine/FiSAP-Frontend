@@ -30,11 +30,18 @@ const PredictedFireMap = ({ deployments }) => {
                     {deployments.map((deployment, index) => {
                         const [lat, lng] = deployment.location.split(",").map(Number);
                         const markerIcon = createEmojiIcon("🔥");
+                        const formattedDate = new Date(deployment.Date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        });
+
+
 
                         return (
                             <Marker key={index} position={[lat, lng]} icon={markerIcon}>
                                 <Popup>
-                                    <strong>Fire Date:</strong> {deployment.date} <br />
+                                    <strong>Fire Date:</strong> {formattedDate} <br />
                                     <strong>Location:</strong> {deployment.location} <br />
                                 </Popup>
                             </Marker>

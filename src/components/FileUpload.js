@@ -23,7 +23,7 @@ const FileUploadSection = ({ file, setFile, setReport, loading, setLoading, endp
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
             const data = await response.json();
-            console.log("Report data:", data);
+            console.log("Report data:", data.data);
             setReport(data.data);
         } catch (error) {
             console.error("Error uploading file:", error);
