@@ -6,6 +6,7 @@ import { LuChartSpline, LuCircuitBoard } from "react-icons/lu";
 import FileUploadSection from "../../components/FileUpload";
 import ReportSummary from "../../components/ReportSummary";
 import FireMap from "../../components/FireMap";
+import PredictedFireMap from "../../components/PredictedFireMap";
 
 
 const Dashboard = () => {
@@ -25,7 +26,7 @@ const Dashboard = () => {
       const response = await fetch("http://127.0.0.1:5000/deployments");
       if (!response.ok) throw new Error("Failed to fetch deployments");
       const data = await response.json();
-      setDeployments(data.deployments);
+      setDeployments(data.data);
     } catch (error) {
       console.error("Error fetching deployments:", error);
     }
@@ -61,6 +62,13 @@ const Dashboard = () => {
                 setLoading={setLoading}
                 endpoint="upload"
               />
+              {report && (
+                <div className="space-y-8">
+                  <ReportSummary report={report} />
+                  <FireMap deployments={deployments} />
+
+                </div>
+              )}
             </Tabs.Content>
             <Tabs.Content value="Prediction">
               <FileUploadSection
@@ -71,24 +79,18 @@ const Dashboard = () => {
                 setLoading={setLoading}
                 endpoint="predictions"
               />
+              {
+                predictions && (
+                  <div className="space-y-8">
+                    <PredictedFireMap deployments={predictions} />
+                  </div>
+                )
+              }
             </Tabs.Content>
           </Tabs.Root>
         </div>
 
-        {report && (
-          <div className="space-y-8">
-            <ReportSummary report={report} />
-            <FireMap deployments={deployments} />
-            <div className="mt-8 text-center">
-              <button
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                onClick={handleReset}
-              >
-                Upload New File
-              </button>
-            </div>
-          </div>
-        )}
+
       </div>
     </div >
   );
