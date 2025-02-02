@@ -14,6 +14,7 @@ const Dashboard = () => {
     try {
       const response = await fetch("http://localhost:5000/upload"); // Update with correct API URL
       const data = await response.json();
+      console.log(data);
       setReport(data.report);
       console.log("Report data:", data.report);
     } catch (error) {
@@ -24,7 +25,7 @@ const Dashboard = () => {
   };
 
   if (loading) return <p>Loading...</p>;
-  // if (!report) return <p>No report data available.</p>;
+  if (!report) return <p>No report data available.</p>;
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
